@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        button {
+              color: black;
+              padding: 15px 50px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+        }
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
+</style>
+<body>
+
+<td th:text= "'Hello, ' + ${authenticator}"></td>
+
+<br>
+<form action="/logout" method="get">
+    <input type="submit" style="float: right;" value="LOGOUT" name="Submit"/>
+</form>
+<br>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">PERSON DATA MENU</legend>
+    <table>
+
+
+        <tr>
+            <td><a href="/admin/addPerson">
+                <button class="/" style="width: 100%;">ADD PERSON</button>
+            </a></td>
+        </tr>
+        </td>
+        <tr>
+            <td><a href="/admin/removePerson">
+                <button class="/" style="width: 100%;">REMOVE PERSON</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/getAllPersons">
+                <button class="/" style="width: 100%;">SHOW ALL PERSONS</button>
+            </a></td>
+        </tr>
+
+    </table>
+</fieldset>
+
+</body>
+</html>
