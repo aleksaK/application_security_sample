@@ -27,7 +27,7 @@ public class RemovePersonController {
                                    BindingResult result, ModelMap modelMap) {
         try {
             service.execute(nickname.getNickname());
-            return "home";
+            return "redirect:/";
         }
         catch (Exception e) {
             result.addError(new FieldError(

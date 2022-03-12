@@ -27,6 +27,7 @@
             <tr>
                 <td style="text-align: left;">Enter person nickname:</td>
                 <td><input type="text" th:field="${nickname.nickname}"/></td>
+                <td><input type="hidden" name="_csrf" th:value="${_csrf.token}"/></td>
             </tr>
             <tr>
                 <td></td>

@@ -26,7 +26,7 @@ public class AddPersonController {
     public String processAddPerson(@ModelAttribute(value = "person") Person person,
                                    @ModelAttribute(value = "password") Password password) {
         service.execute(person, password);
-        return "home";
+        return "redirect:/";
     }
 
 }
