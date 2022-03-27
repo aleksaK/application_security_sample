@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    database: mysql
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://<db url>
+    username: <db login>
+    password: <db password>

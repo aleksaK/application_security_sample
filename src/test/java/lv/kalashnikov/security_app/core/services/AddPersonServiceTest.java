@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql("/schema.sql")
 public class AddPersonServiceTest {
 
     @Autowired private AddPersonService service;
@@ -39,15 +41,16 @@ public class AddPersonServiceTest {
 
     @After
     public void clear() {
-        repository.deleteAll();
+        repository.deleteById("user5");
         manager.deleteUser("user5");
     }
 
     @Test
     @Transactional
     public void testNewUserAddedToDatabase() {
-        Person expected = repository.getById("user5");
-        assertEquals(expected, person);
+        Person result = repository.getById("user5");
+        assertEquals(person, result);
+        assertEquals(5, repository.count());
     }
 
     @Test

@@ -11,14 +11,15 @@ repositories {
 
 dependencies {
 
-    implementation('org.springframework.boot:spring-boot-starter-web:2.6.3')
+    implementation('org.springframework.boot:spring-boot-starter-web:2.6.5')
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.6.3'
-    implementation('org.springframework.boot:spring-boot-starter-thymeleaf:2.6.3')
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf:2.6.5')
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.6.3'
     implementation group: 'com.h2database', name: 'h2', version: '2.1.210'
-    implementation('org.hibernate:hibernate-core:5.6.5.Final')
+    implementation('org.hibernate:hibernate-core:5.6.7.Final')
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation('mysql:mysql-connector-java:8.0.28')
 
     testImplementation('junit:junit:4.13.2')
     testImplementation group: 'com.h2database', name: 'h2', version: '2.1.210'

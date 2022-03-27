@@ -12,14 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql("/schema.sql")
 public class RemovePersonServiceTest {
 
     @Autowired private AddPersonService addPersonService;
@@ -54,6 +55,7 @@ public class RemovePersonServiceTest {
         removePersonService.execute("user5");
         assertTrue(repository.existsById("user6"));
         assertFalse(repository.existsById("user5"));
+        assertEquals(5, repository.count());
     }
 
     @Test
@@ -70,6 +72,7 @@ public class RemovePersonServiceTest {
         removePersonService.execute("user6");
         assertFalse(repository.existsById("user6"));
         assertFalse(repository.existsById("user5"));
+        assertEquals(4, repository.count());
     }
 
     @Test
