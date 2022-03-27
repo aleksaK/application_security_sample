@@ -32,14 +32,14 @@ public class RemovePersonControllerTest {
                 .build();
     }
 
-    @WithMockUser(roles = "USER")
+    @WithMockUser(authorities = "USER")
     @Test
     public void testAccessIsForbiddenForUserRole() throws Exception {
         mvc.perform(get("/admin/removePerson")
                 .contentType(MediaType.ALL)).andExpect(status().isForbidden());
     }
 
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     public void testAccessIsGrantedForAdminRole() throws Exception {
         mvc.perform(get("/admin/removePerson")

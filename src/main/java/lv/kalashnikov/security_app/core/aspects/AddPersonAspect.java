@@ -8,14 +8,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class AddPersonAspect {
 
-    @Autowired private InMemoryUserDetailsManager manager;
+    @Autowired private UserDetailsManager manager;
     @Autowired private PasswordEncoder encoder;
 
     @Pointcut("execution(* lv.kalashnikov.security_app.core.services.AddPersonService.execute(" +
