@@ -56,11 +56,4 @@ public class JdbcSpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout();
     }
 
-    public static void main(String[] args) {
-
-        JdbcSpringSecurityConfig config = new JdbcSpringSecurityConfig();
-        System.out.println(config.getPasswordEncoder().encode("user2"));
-
-    }
-
 }
