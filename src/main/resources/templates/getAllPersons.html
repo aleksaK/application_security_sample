@@ -62,6 +62,16 @@
 </fieldset>
 <br>
 
+<td><a th:href="${'/getAllPersons/' + persons.previousOrFirstPageable().getPageNumber()}">
+    <button class="/" style="width: 15%;">PREVIOUS PAGE</button>
+</a></td>
+
+<td th:text="${'Page ' + persons.getNumber() + ' of ' + persons.getTotalPages()}"></td>
+
+<td><a th:href="${'/getAllPersons/' + persons.nextOrLastPageable().getPageNumber()}">
+    <button class="/" style="width: 10%;">NEXT PAGE</button>
+</a></td>
+
 <form action="/" method="get">
     <input type="submit" style="float: right;" value="Back" name="Submit"/>
 </form>

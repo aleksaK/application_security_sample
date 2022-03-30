@@ -35,21 +35,21 @@ public class GetAllPersonsControllerTest {
     @WithMockUser(roles = "USER")
     @Test
     public void testAccessIsGrantedForUserRole() throws Exception {
-        mvc.perform(get("/getAllPersons")
+        mvc.perform(get("/getAllPersons/0")
                 .contentType(MediaType.ALL)).andExpect(status().isOk());
     }
 
     @WithMockUser(roles = "ADMIN")
     @Test
     public void testAccessIsGrantedForAdminRole() throws Exception {
-        mvc.perform(get("/getAllPersons")
+        mvc.perform(get("/getAllPersons/0")
                 .contentType(MediaType.ALL)).andExpect(status().isOk());
     }
 
     @WithAnonymousUser
     @Test
     public void testAccessIsForbiddenForAnonymousUser() throws Exception {
-        mvc.perform(get("/getAllPersons")
+        mvc.perform(get("/getAllPersons/0")
                 .contentType(MediaType.ALL)).andExpect(status().isFound());
     }
 
