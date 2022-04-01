@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table.table2 {
+               border-collapse: collapse;
+               width: 100%;
+        }
+        table.table2 td {
+                padding: 0.25rem;
+                border: 1px solid #ccc;
+        }
+        caption {
+                font-size: 150%;
+                font-style: italic;
+                padding-bottom: 12px;
+        }
+        .center {
+                text-align: center;
+        }
+        .right {
+                text-align: right;
+        }
+</style>
+<body>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">FIND PERSON</legend>
+    <table style="margin-left: auto; margin-right: auto;">
+        <form action="/getPersonByNickname" th:object="${nickname}" method="post">
+            <tr>
+                <td>Enter nickname or email:</td>
+                <td><input type="text" th:field="${nickname.nickname}"/></td>
+                <td><input type="hidden" name="_csrf" th:value="${_csrf.token}"/></td>
+                <td><input type="submit" value="Find" name="Submit"/></td>
+            </tr>
+        </form>
+    </table>
+    <br>
+
+    <td th:if="${person != null}">
+        <table class="table2">
+            <tr>
+                <td class="center">NICKNAME</td>
+                <td class="center">NAME</td>
+                <td class="center">GENDER</td>
+                <td class="center">AGE</td>
+                <td class="center">EMAIL</td>
+                <td class="center">PHONE NUMBER</td>
+            </tr>
+
+            <td th:if="${person != null}">
+                <tr th:each="person : ${person}">
+                    <td th:text="${person.nickname}"></td>
+                    <td th:text="${person.name}"></td>
+                    <td th:text="${person.gender}"></td>
+                    <td class="center" th:text="${person.age}"></td>
+                    <td th:text="${person.email}"></td>
+                    <td th:text="${person.phoneNumber}"></td>
+                </tr>
+            </td>
+
+        </table>
+    </td>
+
+    <td th:if="${noResult != null}">
+    <td th:text="${noResult}"></td>
+
+</fieldset>
+<br>
+
+<form action="/" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
+
+</body>
+</html>
