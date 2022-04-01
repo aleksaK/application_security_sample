@@ -32,14 +32,14 @@ public class HomeControllerTest {
                 .build();
     }
 
-    @WithMockUser(roles = "USER")
+    @WithMockUser(authorities = "USER")
     @Test
     public void testAccessIsGrantedForUserRole() throws Exception {
         mvc.perform(get("/")
                 .contentType(MediaType.ALL)).andExpect(status().isOk());
     }
 
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     public void testAccessIsGrantedForAdminRole() throws Exception {
         mvc.perform(get("/")
