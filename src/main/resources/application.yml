@@ -3,9 +3,9 @@ spring:
     database: mysql
     show-sql: true
   datasource:
-    url: jdbc:mysql://testdb.c2rwzkv3kyqk.eu-central-1.rds.amazonaws.com/testdb
-    username: admin
-    password: test1234
+    url: jdbc:mysql://<db url>
+    username: <db login>
+    password: <db password>
 properties:
   page:
     size: 50
