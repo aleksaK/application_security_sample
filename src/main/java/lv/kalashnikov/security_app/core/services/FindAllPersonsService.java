@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class GetAllPersonsService {
+public class FindAllPersonsService {
 
     @Autowired private JpaPersonRepository repository;
     private @Value("${properties.page.size}") int pageSize;

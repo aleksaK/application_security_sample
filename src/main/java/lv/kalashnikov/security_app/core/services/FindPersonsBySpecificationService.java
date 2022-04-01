@@ -15,7 +15,7 @@ import static java.util.Map.*;
 
 @Service
 @Transactional
-public class FindBySpecificationService {
+public class FindPersonsBySpecificationService {
 
     @Autowired private JpaPersonRepository repository;
 

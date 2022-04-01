@@ -19,9 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HomeControllerTest {
+public class FindPersonByNicknameControllerTest {
 
-    @Autowired private WebApplicationContext context;
+    @Autowired
+    private WebApplicationContext context;
     private MockMvc mvc;
 
     @Before
@@ -35,22 +36,22 @@ public class HomeControllerTest {
     @WithMockUser(authorities = "USER")
     @Test
     public void testAccessIsGrantedForUserRole() throws Exception {
-        mvc.perform(get("/")
+        mvc.perform(get("/getPersonByNickname")
                 .contentType(MediaType.ALL)).andExpect(status().isOk());
     }
 
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void testAccessIsGrantedForAdminRole() throws Exception {
-        mvc.perform(get("/")
+        mvc.perform(get("/getPersonByNickname")
                 .contentType(MediaType.ALL)).andExpect(status().isOk());
     }
 
     @WithAnonymousUser
     @Test
-    public void testAccessIsGrantedForAnonymousUser() throws Exception {
-        mvc.perform(get("/")
-                .contentType(MediaType.ALL)).andExpect(status().isOk());
+    public void testAccessIsForbiddenForAnonymousUser() throws Exception {
+        mvc.perform(get("/getPersonByNickname")
+                .contentType(MediaType.ALL)).andExpect(status().isFound());
     }
 
 }
