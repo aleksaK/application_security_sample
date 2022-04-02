@@ -2,7 +2,7 @@ package lv.kalashnikov.security_app.core.services;
 
 import lv.kalashnikov.security_app.core.database.JpaPersonRepository;
 import lv.kalashnikov.security_app.core.domain.Gender;
-import lv.kalashnikov.security_app.core.domain.Password;
+import lv.kalashnikov.security_app.core.domain.wrappers.Password;
 import lv.kalashnikov.security_app.core.domain.Person;
 import org.junit.After;
 import org.junit.Before;

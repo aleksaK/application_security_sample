@@ -1,6 +1,6 @@
 package lv.kalashnikov.security_app.web.controllers;
 
-import lv.kalashnikov.security_app.core.domain.Nickname;
+import lv.kalashnikov.security_app.core.domain.wrappers.Nickname;
 import lv.kalashnikov.security_app.core.domain.Person;
 import lv.kalashnikov.security_app.core.services.FindPersonByNicknameService;
 import org.springframework.beans.factory.annotation.Autowired;

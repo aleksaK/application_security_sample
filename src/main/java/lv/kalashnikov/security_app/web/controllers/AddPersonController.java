@@ -1,6 +1,6 @@
 package lv.kalashnikov.security_app.web.controllers;
 
-import lv.kalashnikov.security_app.core.domain.Password;
+import lv.kalashnikov.security_app.core.domain.wrappers.Password;
 import lv.kalashnikov.security_app.core.domain.Person;
 import lv.kalashnikov.security_app.core.services.AddPersonService;
 import org.springframework.beans.factory.annotation.Autowired;

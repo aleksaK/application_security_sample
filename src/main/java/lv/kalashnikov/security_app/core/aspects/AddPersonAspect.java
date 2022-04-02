@@ -1,6 +1,6 @@
 package lv.kalashnikov.security_app.core.aspects;
 
-import lv.kalashnikov.security_app.core.domain.Password;
+import lv.kalashnikov.security_app.core.domain.wrappers.Password;
 import lv.kalashnikov.security_app.core.domain.Person;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,7 +19,7 @@ public class AddPersonAspect {
     @Autowired private PasswordEncoder encoder;
 
     @Pointcut("execution(* lv.kalashnikov.security_app.core.services.AddPersonService.execute(" +
-            "lv.kalashnikov.security_app.core.domain.Person, lv.kalashnikov.security_app.core.domain.Password))" +
+            "lv.kalashnikov.security_app.core.domain.Person, lv.kalashnikov.security_app.core.domain.wrappers.Password))" +
             " && args(person, password)")
     public void performance(Person person, Password password) {
     }

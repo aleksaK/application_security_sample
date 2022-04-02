@@ -7,23 +7,44 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 25%;
-              margin-right: 25%;
-              text-align: center;
+              margin-left: 20%;
+              margin-right: 20%;
+              text-align: left;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
-        table {
-               border-collapse: collapse;
-               width: 100%;
+        submit {
+              color: black;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
         }
-        th, td {
+        fieldset.fieldset1 {
+              display: inline;
+        }
+        fieldset.fieldset2 {
+              display: inline;
+        }
+        fieldset.fieldset3 {
+              text-align: center;
+              display: inline;
+        }
+        table.table3 {
+              border-collapse: collapse;
+              width: 100%;
+              margin-left: auto;
+              margin-right: auto;
+        }
+        table.table3 td {
                 padding: 0.25rem;
-                text-align: left;
                 border: 1px solid #ccc;
         }
         caption {
-                font-size: 110%;
+                font-size: 150%;
                 font-style: italic;
                 padding-bottom: 12px;
         }
@@ -37,28 +58,122 @@
 <body>
 
 <fieldset>
-    <legend style="padding-bottom: 5px;">SHOW PERSONS BY CRITERIA</legend>
-    <table>
-        <tr>
-            <td class="center">NICKNAME</td>
-            <td class="center">NAME</td>
-            <td class="center">GENDER</td>
-            <td class="center">AGE</td>
-            <td class="center">EMAIL</td>
-            <td class="center">PHONE NUMBER</td>
-        </tr>
+    <legend style="padding-bottom: 5px;">FIND PERSONS BY PARAMETERS</legend>
 
-        <td th:if="${persons != null}">
-            <tr th:each="person : ${persons}">
-                <td th:text="${person.nickname}"></td>
-                <td th:text="${person.name}"></td>
-                <td th:text="${person.gender}"></td>
-                <td class="center" th:text="${person.age}"></td>
-                <td th:text="${person.email}"></td>
-                <td th:text="${person.phoneNumber}"></td>
-            </tr>
-        </td>
-    </table>
+    <fieldset class="fieldset1">
+        <legend style="padding-bottom: 5px;">choose parameters</legend>
+        <table class="table1">
+            <form action="/findPersonsBySpecification" th:object="${filters}" method="post">
+
+                <tr>
+                    <td><input type="checkbox" th:field="*{filters[0].field}" value="name"/></td>
+                    <td>name</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="*{filters[1].field}" value="gender"/></td>
+                    <td>gender</td>
+                    <td><input type="hidden" name="_csrf" th:value="${_csrf.token}"/></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="*{filters[2].field}" value="age"/></td>
+                    <td>age</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="*{filters[3].field}" value="email"/></td>
+                    <td>email</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right;"><input type="submit" value="Set parameter"
+                                                                      name="Submit"/></td>
+                </tr>
+
+            </form>
+        </table>
+    </fieldset>
+    <br>
+
+    <td th:if="${filters.filters.size() > 0}">
+        <fieldset class="fieldset2">
+            <legend style="padding-bottom: 5px;">set target values</legend>
+            <table>
+                <form action="/findPersonsBySpecification" th:object="${filters}" method="post">
+
+                    <td><input type="hidden" name="_csrf" th:value="${_csrf.token}"/></td>
+
+                    <tr th:if="${filters.filters[0].field == 'name'}">
+                        <input type="hidden" th:field="${filters.filters[0].field}" value="name">
+                        <td>Name</td>
+                        <td></td>
+                        <td><input type="text" style="width: 30%;" th:field="${filters.filters[0].stringTarget}"></td>
+                    </tr>
+                    <tr th:if="${filters.filters[1].field == 'gender'}">
+                        <input type="hidden" th:field="${filters.filters[1].field}" value="gender">
+                        <select type="hidden" name="Gender" th:field="${filters.filters[1].operator}">
+                            <option value="="></option>
+                        </select>
+                        <td>Gender</td>
+                        <td></td>
+                        <td><select name="Gender" th:field="${filters.filters[1].integerTarget}">
+                            <option value="0">MALE</option>
+                            <option value="1">FEMALE</option>
+                        </select></td>
+                    </tr>
+                    <tr th:if="${filters.filters[2].field == 'age'}">
+                        <input type="hidden" th:field="${filters.filters[2].field}" value="age">
+                        <td>Age</td>
+                        <td><select name="operator" th:field="${filters.filters[2].operator}">
+                            <option value=">">></option>
+                            <option value=">=">>=</option>
+                            <option value="<"><</option>
+                            <option value="<="><=</option>
+                            <option value="=">=</option>
+                        </select></td>
+                        <td><input type="text" style="width: 30%;" th:field="${filters.filters[2].integerTarget}"></td>
+                    </tr>
+                    <tr th:if="${filters.filters[3].field == 'email'}">
+                        <input type="hidden" th:field="${filters.filters[3].field}" value="email">
+                        <td>Email</td>
+                        <td></td>
+                        <td><input type="text" style="width: 30%;" th:field="${filters.filters[3].stringTarget}"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: left;"><input type="submit" value="Find" name="Submit"/></td>
+                    </tr>
+
+                </form>
+            </table>
+        </fieldset>
+    </td>
+    <br>
+
+    <td th:if="${filtered != null}">
+        <fieldset class="fieldset3">
+            <legend style="padding-bottom: 5px;">filtered list</legend>
+            <table class="table3">
+                <tr>
+                    <td class="center">NICKNAME</td>
+                    <td class="center">NAME</td>
+                    <td class="center">GENDER</td>
+                    <td class="center">AGE</td>
+                    <td class="center">EMAIL</td>
+                    <td class="center">PHONE NUMBER</td>
+                </tr>
+
+                <tr th:each="person : ${filtered}">
+                    <td th:text="${person.nickname}"></td>
+                    <td th:text="${person.name}"></td>
+                    <td th:text="${person.gender}"></td>
+                    <td class="center" th:text="${person.age}"></td>
+                    <td th:text="${person.email}"></td>
+                    <td th:text="${person.phoneNumber}"></td>
+                </tr>
+
+            </table>
+        </fieldset>
+    </td>
+
 </fieldset>
 <br>
 

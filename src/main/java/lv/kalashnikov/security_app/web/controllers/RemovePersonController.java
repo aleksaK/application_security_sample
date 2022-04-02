@@ -1,6 +1,6 @@
 package lv.kalashnikov.security_app.web.controllers;
 
-import lv.kalashnikov.security_app.core.domain.Nickname;
+import lv.kalashnikov.security_app.core.domain.wrappers.Nickname;
 import lv.kalashnikov.security_app.core.services.RemovePersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
